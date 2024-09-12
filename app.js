@@ -4,6 +4,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://thalitasuzyr:thalitasuzyr@clustersuzy.p8ib9.mongodb.net/?retryWrites=true&w=majority&appName=ClusterSuzy";
+
+MongoClient.connect(uri)
+  .then((client) => {
+    console.log("Conectado ao MongoDB Atlas!😎");
+    const db = client.db('databasetest');
+    app.locals.db = db;
+  })
+  .catch((err) => {
+    console.log("Erro ao conectar ao MongoDB Atlas!😔")
+  });
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var signInRouter = require('./routes/signIn');
