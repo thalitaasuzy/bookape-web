@@ -22,8 +22,9 @@ var usersRouter = require('./routes/users');
 var signInRouter = require('./routes/signIn');
 var signUpRouter = require('./routes/signUp');
 var bookInfoRouter = require('./routes/bookInfo');
+var bookDetailsRouter = require('./routes/bookDetails');
 var magicRouter = require('./routes/magic');
-var homeRouter = require('./routes/home');
+var searchBooksRouter = require('./routes/searchBooks');
 
 var app = express();
 
@@ -43,7 +44,38 @@ app.use('/signIn', signInRouter);
 app.use('/signUp', signUpRouter);
 app.use('/bookInfo', bookInfoRouter);
 app.use('/magic', magicRouter);
-app.use('/home', homeRouter);
+app.use('/searchBooks', searchBooksRouter);
+app.use('/bookDetails', bookDetailsRouter);
+
+// Rota para buscar os livros na Open Library API
+app.get('/search', async (req, res) => {
+  const title = req.query.title;
+  const url = `https://openlibrary.org/search.json?title=${encodeURIComponent(title)}`;
+
+  try {
+      const response = await fetch(url);
+      const data = await response.json();
+      res.json(data); // Envia os dados de volta para o front-end
+  } catch (error) {
+      console.error('Erro ao buscar os livros:', error);
+      res.status(500).json({ error: 'Erro ao buscar os livros' });
+  }
+});
+
+// Rota para a página de detalhes do livro
+app.get('/book/:key', async (req, res) => {
+  const bookKey = req.params.key;
+  const url = `https://openlibrary.org${bookKey}.json`;
+
+  try {
+      const response = await fetch(url);
+      const book = await response.json();
+      res.render('bookDetails', { book });
+  } catch (error) {
+      console.error('Erro ao buscar os detalhes do livro:', error);
+      res.status(500).json({ error: 'Erro ao buscar os detalhes do livro' });
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

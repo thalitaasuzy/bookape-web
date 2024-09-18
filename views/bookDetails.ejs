@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Livro</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bookDetails.css">
+</head>
+    <%- include('./partials/headerUsers') %>
+<body>
+    <main>
+        <section class="section-book-details">
+            <div id="book-details">
+                <section class="livro">
+                    <img class="capa" src="https://covers.openlibrary.org/b/id/<%= book.covers ? book.covers[0] : '' %>-L.jpg" alt="<%= book.title %>">
+                    <h2><%= book.title %></h2>
+                    <p>Autor: <%= book.author_name ? book.authors_name.map(author_name => author_name.name).join(', ') : 'Desconhecido' %> </p>
+                    <!-- <p>Autor: <%= book.author_name ? book.author_name.join(', ') : 'Desconhecido' %> </p> -->
+                    <p><%= book.publish_date || 'Desconhecido' %></p>
+                    <button>Adicionar Comentário</button>
+                </section>
+            </div>
+
+            <div class="container">
+                <section class="secao">
+                    <h2>4.5</h2> <!-- Será Editavel -->
+                    <p>Avaliação</p>
+                </section>
+                <section class="secao">
+                    <h2> <%= book.number_of_pages || 'Desconhecido' %></h2> <!-- Será Editavel / API-->
+                    <p>Páginas</p>
+                </section>
+                <section class="secao">
+                    <h2> <%= book.subjects ? book.subjects.join(', ') : 'Desconhecido' %></h2> <!-- Será Editavel / API -->
+                    <p>Gênero</p>
+                </section>
+                <section class="secao">
+                    <h2>Lendo</h2> <!-- Será Editavel / API -->
+                    <p>Status</p>
+                </section>
+            </div>
+
+            <div class="container">
+                <h2>Descrição</h2>
+                <p id="bookDescription">Nesta história que marcou gerações de leitores em todo o mundo, um piloto cai com seu avião no deserto do Saara e encontra um pequeno príncipe, que o leva a uma aventura filosófica e poética através de planetas que encerram a solidão humana. <br><br>
+                Um livro para todos os públicos, O pequeno príncipe é uma obra atemporal, com metáforas pertinentes e aprendizados sobre afeto, sonhos, esperança e tudo aquilo que é invisível aos olhos. </p>
+            </div>
+
+            <div class="container">
+                <h2>Capítulo X</h2>
+                <p id="pagesCount">Página 20 de 96</p>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                    <span class="percentage">20%</span>
+                </div>
+                </div>
+
+                <div class="container">
+                    <h2>Citações e Comentários</h2>
+                    <div class="quotes-container">
+                        </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="javascripts/bookDetails.js"></script>
+    
+</body>
+</html>
