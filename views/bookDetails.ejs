@@ -13,60 +13,55 @@
         <section class="section-book-details">
             <div id="book-details">
                 <section class="livro">
-                    <img class="capa" src="https://covers.openlibrary.org/b/id/<%= book.covers ? book.covers[0] : '' %>-L.jpg" alt="<%= book.title %>">
+                    <img class="capa" src="/<%= book.cover %>" alt="<%= book.title %>">
                     <h2><%= book.title %></h2>
-                    <p>Autor: <%= book.author_name ? book.authors_name.map(author_name => author_name.name).join(', ') : 'Desconhecido' %> </p>
-                    <!-- <p>Autor: <%= book.author_name ? book.author_name.join(', ') : 'Desconhecido' %> </p> -->
-                    <p><%= book.publish_date || 'Desconhecido' %></p>
-                    <button>Adicionar Comentário</button>
+                    <p><%= book.author || 'Desconhecido' %> </p>
+                    <p>Data de publicação: <%= formattedDate || 'Desconhecida' %></p>
                 </section>
             </div>
 
             <div class="container">
                 <section class="secao">
-                    <h2>4.5</h2> <!-- Será Editavel -->
+                    <h2>4.5</h2> <!-- Valor fixo ou poderá ser editável -->
                     <p>Avaliação</p>
                 </section>
                 <section class="secao">
-                    <h2> <%= book.number_of_pages || 'Desconhecido' %></h2> <!-- Será Editavel / API-->
+                    <h2> <%= book.pages || 'Desconhecido' %> </h2>
                     <p>Páginas</p>
                 </section>
                 <section class="secao">
-                    <h2> <%= book.subjects ? book.subjects.join(', ') : 'Desconhecido' %></h2> <!-- Será Editavel / API -->
+                    <h2> <%= book.genre || 'Desconhecido' %> </h2>
                     <p>Gênero</p>
                 </section>
                 <section class="secao">
-                    <h2>Lendo</h2> <!-- Será Editavel / API -->
+                    <h2>Lendo</h2> <!-- Poderá ser editável -->
                     <p>Status</p>
                 </section>
             </div>
 
             <div class="container">
                 <h2>Descrição</h2>
-                <p id="bookDescription">Nesta história que marcou gerações de leitores em todo o mundo, um piloto cai com seu avião no deserto do Saara e encontra um pequeno príncipe, que o leva a uma aventura filosófica e poética através de planetas que encerram a solidão humana. <br><br>
-                Um livro para todos os públicos, O pequeno príncipe é uma obra atemporal, com metáforas pertinentes e aprendizados sobre afeto, sonhos, esperança e tudo aquilo que é invisível aos olhos. </p>
+                <p id="bookDescription"><%= book.description || 'Sem descrição disponível' %></p>
             </div>
 
-            <div class="container">
+            <!--<div class="container">
                 <h2>Capítulo X</h2>
-                <p id="pagesCount">Página 20 de 96</p>
+                <p id="pagesCount">Página 20 de <%= book.totalPages || '96' %></p>
                 <div class="progress-bar">
                     <div class="progress"></div>
                     <span class="percentage">20%</span>
                 </div>
-                </div>
-
-                <div class="container">
-                    <h2>Citações e Comentários</h2>
-                    <div class="quotes-container">
-                        </div>
-                </div>
-
             </div>
+
+            <div class="container">
+                <h2>Citações e Comentários</h2>
+                <div class="quotes-container">
+                    Adicionar seções de citações ou comentários aqui 
+                </div>
+            </div> -->
         </section>
     </main>
 
     <script src="javascripts/bookDetails.js"></script>
-    
 </body>
 </html>
